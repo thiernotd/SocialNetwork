@@ -10,15 +10,15 @@ import java.util.Date;
 public class Message {
 
 	public Date date ;
-	public int idMessage;
+	public int idMsg;
 	public int idUser;
 	public String message;
 	public String user;
 	
 	
-	public Message(Date date, int idMessage, int idUser, String message, String user) {
+	public Message(Date date, int idMsg, int idUser, String message, String user) {
 		this.date = date;
-		this.idMessage = idMessage;
+		this.idMsg = idMsg;
 		this.idUser = idUser;
 		this.message = message;
 		this.user = user;
@@ -38,14 +38,14 @@ public class Message {
 
 
 
-	public int getIdMessage() {
+	public int getIdMsg() {
 		return idMessage;
 	}
 
 
 
-	public void setIdMessage(int idMessage) {
-		this.idMessage = idMessage;
+	public void setIdMsg(int idMsg) {
+		this.idMsg = idMsg;
 	}
 
 
