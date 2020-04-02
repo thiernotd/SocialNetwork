@@ -1,6 +1,6 @@
 /**
- * @author 
- * @author 
+ * @author Thierno DIALLO
+ * @author Khady Adiama DIEDHIOU
  */
 package Serveur;
 
@@ -21,7 +21,7 @@ public class Comment{
 		this.idCommentaire = idCmnt;
 		this.idUser= idUsr;
 		this.comment = cmnt;
-		this.user = usr;	
+		this.user = usr;
 	}
 	public Date getDate(){
 		return this.date;
