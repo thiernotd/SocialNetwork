@@ -1,0 +1,51 @@
+// FTPContentHandler.java
+//
+// gestionnaire de contenu pour le protocole monFTP
+
+package up13.monftp;
+import java.net.*;
+import java.io.*;
+
+public class FTPContentHandler extends ContentHandler {
+
+	String login="";
+	String passwd="";
+	String machine="";
+	String nomFichier="";
+	String fichier="";
+
+	public Object getContent(URLConnection urlc) throws IOException {
+		URL url = urlc.getURL();
+		String[] userInfo = url.getUserInfo().split(":");
+		login = userInfo[0];
+		passwd = userInfo[1];
+		machine = url.getHost();
+		nomFichier = url.getQuery();
+		setFile();
+		return new FTPContent(login,passwd,machine,nomFichier,fichier);
+	}
+
+	private void setFile() throws IOException {
+		String command = new String();
+//		command = "scp "+ login + "@" + machine + ":" + nomFichier + " tmp.txt";
+		command = "cp "+ nomFichier + " tmp.txt";
+		Process p = Runtime.getRuntime().exec(command);
+System.out.println(command);
+		try {
+			p.waitFor();
+		} catch (Exception ex){ System.out.println(ex); error("InterruptedException occurred."); }
+
+		fichier="";
+		InputStream in = new FileInputStream("tmp.txt");
+		int b;
+		while ((b = in.read()) != -1) {
+			fichier += (char) b;
+			while ((b = in.read()) != -1 && ((char) b) != '\n') fichier += (char) b;
+		};
+		in.close();	
+	}
+
+	public static void error(String s){
+		System.out.println(s); System.exit(1);
+	}
+}

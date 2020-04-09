@@ -1,0 +1,48 @@
+// FTPContent.java
+//
+// structure définissant un contenu obtenu par FTP
+// champs :
+//		- String login
+//		- String passwd
+//		- String machine
+//		- String nomFichier
+//		- String contenuFichier
+
+package up13.monFTP;
+
+public class FTPContent {
+	private String login="";
+	private String passwd="";
+	private String machine="";
+	private String nomFichier=null;
+	private String fichier=null;
+
+	public FTPContent (String login,String passwd,String machine,String nomFichier,String fichier) {
+		this.login = login;
+		this.passwd = passwd;
+		this.machine = machine;
+		this.nomFichier = nomFichier;
+		this.fichier = fichier;
+	}
+
+	public String getLogin () {
+		return login;
+	}
+
+	public String getPasswd () {
+		return passwd;
+	}
+
+	public String getMachine () {
+		return machine;
+	}
+
+	public String getNomFichier () {
+		return nomFichier;
+	}
+
+	public String getFichier () {
+		return fichier;
+	}
+
+}

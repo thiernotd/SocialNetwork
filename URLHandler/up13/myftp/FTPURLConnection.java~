@@ -1,0 +1,59 @@
+
+/** 
+ * Une connection URL pour le protocole FTP (une partie).
+ *
+ * <p>La syntaxe d'une URL FTP est :
+ *
+ * <pre>
+ * ftp:&lt;url&gt;?{commande}
+ * </pre>
+ *
+ * <p>par exemple :
+ *
+ * <p><code>
+ * ftp://univ-paris13.fr?fichier<br>
+ * </code>
+ *
+ * 
+ * <p>Exemple d'utilisation dans un code :
+ *
+ * <pre>
+ * URL url = new URL("ftp://www.univ-paris13.fr?fichier");
+ * FTPURLConnection ftpConnection = (FTPURLConnection)url.openConnection();
+ * FTPContent ftpContent = ftpConnection.getContent();
+ * </pre>
+ *
+ */
+
+package up13.monFTP;
+
+import java.net.*;
+import java.io.*;
+
+public class FTPURLConnection extends URLConnection {
+
+    public FTPURLConnection(URL url) throws MalformedURLException {
+		super(url);
+		setContentHandlerFactory(new FTPContentHandlerFactory());
+    }	
+
+	public void connect() {
+	}
+
+   public InputStream getInputStream() {
+		return null;
+   }
+
+   public String getHeaderField(String name) {
+	if (name.equals("content-type")) return "monFTP";
+	return null;
+    }
+
+}
+
+
+
+
+
+
+
