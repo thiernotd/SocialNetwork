@@ -2,9 +2,7 @@
  * @author Thierno DIALLO
  * @author Khady Adiama DIEDHIOU
  */
-package Serveur;
-
-import java.util.Date;
+package up13.myftp;
 
 
 import java.util.Date;
@@ -17,11 +15,11 @@ public class Comment {
 	public String user;
 	public int pidCommentaire;
 	public int pidMessage;
-
-
+	
+	
 	public Comment(Date date, int idCommentaire, int idUser, String comment, String user, int pidCommentaire,
 			int pidMessage) {
-
+		
 		this.date = date;
 		this.idCommentaire = idCommentaire;
 		this.idUser = idUser;
