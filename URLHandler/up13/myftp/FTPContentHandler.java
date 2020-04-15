@@ -10,9 +10,6 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Date;
 
-import Serveur.Comment;
-import Serveur.Message;
-
 import java.io.*;
 
 public class FTPContentHandler extends ContentHandler {
@@ -97,28 +94,28 @@ public class FTPContentHandler extends ContentHandler {
 	in.close();
 }
 
-	public int scoreComment(Comment a, ArrayList <Comment> ListeComment ){
-		int score = 20;
-		for(Comment b:ListeComment) {
-			if(a.getIdComment()==b.getPidCommentaire()) 
-			{
-				score =score+20; 
-			}
-		}
-		return score;
-	}
-
-	@Override
-	public int scoreMessage(Message a, ArrayList <Comment> ListeComment){
-		int score = 20;
-		for(Comment b:ListeComment) {
-			if(a.getIdMessage() == b.pidMessage()) {
-				score = score+ scoreComment(b,ListeComment);
-			}
-		}
-		return score;
-	} 
-	
+//	public int scoreComment(Comment a, ArrayList <Comment> ListeComment ){
+//		int score = 20;
+//		for(Comment b:ListeComment) {
+//			if(a.getIdComment()==b.getPidCommentaire()) 
+//			{
+//				score =score+20; 
+//			}
+//		}
+//		return score;
+//	}
+//
+//	@Override
+//	public int scoreMessage(Message a, ArrayList <Comment> ListeComment){
+//		int score = 20;
+//		for(Comment b:ListeComment) {
+//			if(a.getIdMessage() == b.pidMessage()) {
+//				score = score+ scoreComment(b,ListeComment);
+//			}
+//		}
+//		return score;
+//	} 
+//	
 	
 	 
 //	private void setFile() throws IOException {
