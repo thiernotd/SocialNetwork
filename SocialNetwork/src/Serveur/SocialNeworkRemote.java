@@ -10,10 +10,9 @@ import java.rmi.RemoteException;
 
 public interface SocialNeworkRemote extends Remote {
 	
-	public int importanceValeur() throws RemoteException;
-	public int scoreComment()throws RemoteException;
-	public int scoreMessage()throws RemoteException;
-	public void decreaseMessage()throws RemoteException;
-	public boolean isActiveMessage()throws RemoteException;
+	public String getNomXml() throws RemoteException;
+	public void setNomXml(String nom) throws RemoteException;
+	
+	
 
 }

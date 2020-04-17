@@ -3,13 +3,13 @@
  * @author Khady Adiama DIEDHIOU
  */
 
-package Serveur;
+package Client;
 
 import javax.xml.bind.annotation.*;
 
 @XmlRootElement
 public class Message {
-
+	
 	private int idMessage1;
 	private int idUser1;
 	private int idMessage2;
@@ -90,9 +90,6 @@ public class Message {
 	public void setIdUser3(int idUser3) {
 		this.idUser3 = idUser3;
 	}
-
-
-
 
 
 }

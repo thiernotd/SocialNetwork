@@ -5,43 +5,55 @@
 
 package Serveur;
 
+import java.io.FileOutputStream;
+import java.net.URL;
 import java.rmi.Naming;
 import java.rmi.registry.LocateRegistry;
+
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
+
+import up13.myftp.FTPContent;
 
 
 public class Serveur {
 
 	public static void main(String[] args) {
+			
+				System.getProperties().put("java.protocol.handler.pkgs", "up13");
+		try{
+			URL url = new URL("myftp://aLogin:aPaswwd@www.ig-edu.univ-paris13.fr");
+			FTPContent ftpContent = (FTPContent) url.getContent();
+			
+		    //creating the JAXB context
+		    JAXBContext jContext = JAXBContext.newInstance(Message.class);
+		    //creating the marshaler object
+		    Marshaller marshallObj = jContext.createMarshaller();
+		    //setting the property to show xml format output
+		    marshallObj.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+		    //setting the values in POJO class
+		    Message message = new Message(ftpContent.getM1().getIdMessage(),ftpContent.getM1().getIdUser(), 
+		    		ftpContent.getM2().getIdMessage(),ftpContent.getM2().getIdUser(), 
+		    		ftpContent.getM3().getIdMessage(),ftpContent.getM3().getIdUser());
+		    
+		    //calling the marshal method
+		    marshallObj.marshal(message, new FileOutputStream("message.xml"));
+		} catch(Exception e) {
+		    e.printStackTrace();
+		    
+		}
 		try {
 			SocialNetworkImpl obj = new SocialNetworkImpl();
 			LocateRegistry.createRegistry(1198);
 			Naming.rebind("rmi://localhost:1198/SN", obj);
 			System.out.println(obj.toString());
+			obj.setNomXml("message.xml");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		/*System.getProperties().put("java.protocol.handler.pkgs", "up13");
-	    try{ 
-	    	//if(args.length!=1) 
-	    	//error("Usage: java TestURLHandler myftp://aLogin:aPaswwd@www.ig-edu.univ -paris13.fr?aFile.txt");
-	    	URL url = new URL("myftp://aLogin:aPaswwd@www.ig-edu.univ-paris13.fr");
-	    	FTPContent ftpContent = (FTPContent) url.getContent(); 
-	    	System.out.println("login : " + ftpContent.getLogin()); 
-	    	System.out.println("passwd : " + ftpContent.getPasswd()); 
-	    	System.out.println("host : " + ftpContent.getHost()); 
-	    	System.out.println("retrieved file : " + ftpContent.getFileName()); 
-	    	//System.out.println("file content : " + ftpContent.getFile());
-	    	}catch (MalformedURLException ex){ System.out.println(ex); error("Bad URL");
-	    	}catch (IOException ex){ System.out.println(ex); error("IOException occurred.");
-	    	} 
-	    }
-
- 	public static void error(String s){
-	 System.out.println(s); System.exit(1); 
-	 }
-
-		 */
-
+		
+			
 	}
 }
 	

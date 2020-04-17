@@ -6,8 +6,7 @@ public class FTPContentHandlerFactory implements ContentHandlerFactory {
     }
 
     public FTPContentHandler createContentHandler(String mimeType) { 
-        /* return new FTPContentHandler();  
-         }*/
+        
     	if(mimeType.equals("myftp")){
     		   System.out.println("Requested protocol: "+mimeType);
     		   return new FTPContentHandler();

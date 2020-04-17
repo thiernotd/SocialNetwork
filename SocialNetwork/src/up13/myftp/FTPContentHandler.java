@@ -29,14 +29,12 @@ public class FTPContentHandler extends ContentHandler {
         host = url.getHost();
         fileName = url.getQuery();
         setFile();
-        afficheLesMessage();
+        
         Message liste[] = meilleurMessage(ListeMessage);
         m1 = liste[0];
         m2= liste[1];
         m3= liste[2];
-        for (Message a :liste) {
-            System.out.println(a.toString());
-        }
+        
         return new FTPContent(login ,passwd ,host ,fileName ,file,m1,m2,m3);
      }
     ArrayList <Message> ListeMessage = new ArrayList<Message>(); // Create an ArrayList object
@@ -51,15 +49,21 @@ public class FTPContentHandler extends ContentHandler {
        Integer idUser;
        String message;
        String user ;
-       //String elementLigne[];
        Integer pidMessage = 0;
        Integer idCommentaire;
        String comment ;
        Integer pidCommentaire;
 
-       while ((line = in.readLine()) != null && i < 1000)
+       int max = 2500;
+       int min = 100;
+       int range = max - min + 1;
+       int rand = (int)(Math.random() * range) + min;
+
+
+
+           while ((line = in.readLine()) != null && i < rand )
        {
-           //System.out.println(line);
+           
            String elementLigne[]=line.split("@");
            if(elementLigne.length==4) {
                date = new Date();
@@ -69,7 +73,7 @@ public class FTPContentHandler extends ContentHandler {
                user = elementLigne[3];
                Message e = new Message(date,idMessage,idUser,message,user,20 );
                ListeMessage.add(e);
-              // System.out.println(e.toString());
+              
            } else if (elementLigne.length==5) {
 
                pidMessage = 1;
@@ -99,7 +103,7 @@ public class FTPContentHandler extends ContentHandler {
                    }
                }
 
-               //System.out.println(e.toString());
+               
            }
            else if (elementLigne.length==6)
            {
@@ -119,43 +123,16 @@ public class FTPContentHandler extends ContentHandler {
                         a.setScore(20);
                 }
                }
-               //System.out.println(e.toString());
+               
            }
            i++;
        }
        Collections.sort(ListeMessage);
        Collections.reverse(ListeMessage);
-       /*for(Message a:ListeMessage) {
-          System.out.println(a.toString());
-       }
-
-        */
+       
        in.close();
    }
 
-
-//	public int scoreComment(Comment a, ArrayList <Comment> ListeComment ){
-//		int score = 20;
-//		for(Comment b:ListeComment) {
-//			if(a.getIdComment()==b.getPidCommentaire())
-//			{
-//				score =score+20;
-//			}
-//		}
-//		return score;
-//	}
-//
-//	@Override
-//	public int scoreMessage(Message a, ArrayList <Comment> ListeComment){
-//		int score = 20;
-//		for(Comment b:ListeComment) {
-//			if(a.getIdMessage() == b.pidMessage()) {
-//				score = score+ scoreComment(b,ListeComment);
-//			}
-//		}
-//		return score;
-//	}
-//
 
     public Message[] meilleurMessage(ArrayList<Message> lesMessages){
         Message liste[] = new Message[3];
